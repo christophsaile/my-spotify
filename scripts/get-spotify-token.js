@@ -1,25 +1,25 @@
-// Open your browser and enter this address http://localhost:3000/login. You will get your tokens as an array result from two API calls: the first one is to get access token and refresh token, the second one to grant the refresh token.
+// Open your browser and enter this address http://localhost:3030/login. You will get your tokens as an array result from two API calls: the first one is to get access token and refresh token, the second one to grant the refresh token.
 // There you go. You finally have your refresh token for your website. You can continue implement Spotify to your website now. Happy coding!
-require('dotenv').config();
-const express = require('express')
-const axios = require('axios')
-const cors = require('cors')
+require('dotenv').config({ path: ['.env.local', '.env'] });
+const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
 
-const app = express()
-app.use(cors())
+const app = express();
+app.use(cors());
 
-CLIENT_ID = process.env.SPOTIFY_CLIENT_ID // your spotify client id
-CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET // your spotify client secret
-REDIRECT_URI = 'http://localhost:3000/callback' // my case is 'http://localhost:3000/callback'
-SCOPE = ['user-read-currently-playing', 'user-top-read', 'user-read-recently-played'] // add the scopes you will need for your API calls, https://developer.spotify.com/documentation/web-api/concepts/scopes#user-top-read
+CLIENT_ID = process.env.SPOTIFY_CLIENT_ID; // your spotify client id
+CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET; // your spotify client secret
+REDIRECT_URI = 'http://localhost:3030/callback'; // my case is 'http://localhost:3030/callback'
+SCOPE = ['user-read-currently-playing', 'user-top-read', 'user-read-recently-played']; // add the scopes you will need for your API calls, https://developer.spotify.com/documentation/web-api/concepts/scopes#user-top-read
 
 app.get('/login', (request, response) => {
-  const redirect_url = `https://accounts.spotify.com/authorize?response_type=code&client_id=${CLIENT_ID}&scope=${SCOPE}&state=123456&redirect_uri=${REDIRECT_URI}&prompt=consent`
-  response.redirect(redirect_url)
-})
+  const redirect_url = `https://accounts.spotify.com/authorize?response_type=code&client_id=${CLIENT_ID}&scope=${SCOPE}&state=123456&redirect_uri=${REDIRECT_URI}&prompt=consent`;
+  response.redirect(redirect_url);
+});
 
 app.get('/callback', async (request, response) => {
-  const code = request.query['code']
+  const code = request.query['code'];
   await axios
     .post(
       (url = 'https://accounts.spotify.com/api/token'),
@@ -41,7 +41,7 @@ app.get('/callback', async (request, response) => {
         },
       })
     )
-    .then(resp1 => {
+    .then((resp1) => {
       axios
         .post(
           (url = 'https://accounts.spotify.com/api/token'),
@@ -57,12 +57,12 @@ app.get('/callback', async (request, response) => {
             },
           })
         )
-        .then(resp2 => {
-          return response.send(JSON.stringify([resp1.data, resp2.data]))
-        })
-    })
-})
+        .then((resp2) => {
+          return response.send(JSON.stringify([resp1.data, resp2.data]));
+        });
+    });
+});
 // your port of REDIRECT_URI
-app.listen(3000, () => {
-  console.log('Listening on :3000')
-})
+app.listen(3030, () => {
+  console.log('Listening on :3030');
+});

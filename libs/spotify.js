@@ -33,7 +33,17 @@ export const myAlbums = async (offset, limit) => {
 export const myTopArtists = async () => {
   const { access_token } = await getAccessToken();
 
-  return fetch('https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5&offset=0', {
+  return fetch('https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=10&offset=0', {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+
+export const myTopTracks = async () => {
+  const { access_token } = await getAccessToken();
+
+  return fetch('https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=10&offset=0', {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
@@ -51,11 +61,11 @@ export const myPlaylists = async () => {
 };
 
 export const currentlyPlayingSong = async () => {
-  const { access_token } = await getAccessToken()
+  const { access_token } = await getAccessToken();
 
   return fetch('https://api.spotify.com/v1/me/player/currently-playing', {
-      headers: {
-          Authorization: `Bearer ${access_token}`,
-      },
-  })
-}
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};

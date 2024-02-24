@@ -1,3 +1,5 @@
+export type TimeRange = 'long_term' | 'medium_term' | 'short_term';
+
 const getAccessToken = async () => {
   const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
 
@@ -11,14 +13,14 @@ const getAccessToken = async () => {
     },
     body: new URLSearchParams({
       grant_type: 'refresh_token',
-      refresh_token,
+      refresh_token: refresh_token || '',
     }),
   });
 
   return response.json();
 };
 
-export const myAlbums = async (offset, limit) => {
+export const myAlbums = async (offset: number, limit: number) => {
   const { access_token } = await getAccessToken();
 
   const data = fetch(`https://api.spotify.com/v1/me/albums?offset=${offset}&limit=${limit}`, {
@@ -30,20 +32,20 @@ export const myAlbums = async (offset, limit) => {
   return data;
 };
 
-export const myTopArtists = async () => {
+export const myTopArtists = async (timeRange: TimeRange) => {
   const { access_token } = await getAccessToken();
 
-  return fetch('https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=10&offset=0', {
+  return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=10&offset=0`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
   });
 };
 
-export const myTopTracks = async () => {
+export const myTopTracks = async (timeRange: TimeRange) => {
   const { access_token } = await getAccessToken();
 
-  return fetch('https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=10&offset=0', {
+  return fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=10&offset=0`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },

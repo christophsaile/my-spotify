@@ -10,7 +10,7 @@ export default async function Home() {
 
   return (
     <Fragment>
-      <main className='flex flex-col gap-16 mx-auto max-w-screen-lg min-h-screen'>
+      <main className='flex flex-col py-12 gap-16 mx-auto max-w-screen-lg min-h-screen'>
         <section>
           <RankedTimeSelection variant='artists'></RankedTimeSelection>
           <RankedList timeRange='short_term' variant='artists' />

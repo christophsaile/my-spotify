@@ -20,16 +20,24 @@ const getAccessToken = async () => {
   return response.json();
 };
 
+export const myProfile = async () => {
+	const { access_token } = await getAccessToken();
+
+	return fetch('https://api.spotify.com/v1/me', {
+		headers: {
+			Authorization: `Bearer ${access_token}`,
+		},
+	});
+}
+
 export const myAlbums = async (offset: number, limit: number) => {
   const { access_token } = await getAccessToken();
 
-  const data = fetch(`https://api.spotify.com/v1/me/albums?offset=${offset}&limit=${limit}`, {
+  return fetch(`https://api.spotify.com/v1/me/albums?offset=${offset}&limit=${limit}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
   });
-
-  return data;
 };
 
 export const myTopArtists = async (timeRange: TimeRange) => {

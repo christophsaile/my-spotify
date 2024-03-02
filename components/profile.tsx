@@ -1,0 +1,19 @@
+import { myProfile } from '@/libs/spotify';
+import Image from 'next/image';
+
+export default async function Profile() {
+  const profile = await (await myProfile()).json();
+
+  return (
+    <a className='flex gap-4 items-center' href={profile.external_urls.spotify}>
+      <Image
+        className='min-w-10 w-10 h-10 rounded-xl'
+        alt=''
+        src={profile.images[0].url}
+        width={64}
+        height={64}
+      ></Image>
+      <span>{profile.display_name}</span>
+    </a>
+  );
+}

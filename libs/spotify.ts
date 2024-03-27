@@ -63,7 +63,7 @@ export const myTopTracks = async (timeRange: TimeRange) => {
 export const myPlaylists = async () => {
   const { access_token } = await getAccessToken();
 
-  return fetch('https://api.spotify.com/v1/me/playlists?limit=10&offset=0', {
+  return fetch('https://api.spotify.com/v1/me/playlists?&offset=0', {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },

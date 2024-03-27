@@ -2,6 +2,7 @@ import Header from '@/components/header';
 import RankedTimeRange from '@/components/ranked-time-range';
 import RankedList from '@/components/ranked-list';
 import Intro from '@/components/intro';
+import Playlists from '@/components/playlists';
 
 export default async function Home() {
   return (
@@ -32,9 +33,7 @@ export default async function Home() {
           <RankedList timeRange='long_term' variant='tracks' />
         </section>
         <section>
-          <h2 id='playlistst' className='mb-8 text-2xl'>
-            My Playlists
-          </h2>
+          <Playlists></Playlists>
         </section>
       </main>
     </div>

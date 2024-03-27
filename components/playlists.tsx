@@ -30,7 +30,13 @@ export default async function Playlists() {
               target='_blank'
               rel='noreferrer'
             >
-              <Image className='aspect-square rounded-lg' src={playlist.images[0].url} alt='' />
+              <Image
+                className='aspect-square rounded-lg'
+                src={playlist.images[0].url}
+                alt=''
+                width={250}
+                height={250}
+              />
               <span>{playlist.name}</span>
             </a>
           </li>

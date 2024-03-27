@@ -4,7 +4,7 @@ export default async function Intro() {
 	const profile = await (await myProfile()).json();
 
   return (
-    <div className='flex flex-col gap-6 w-7/12'>
+    <div className='flex flex-col gap-6 md:w-7/12'>
       <h1 className="text-2xl">
         Welcome to <a href={profile.external_urls.spotify} className='underline'>my Spotify</a> dashboard!
       </h1>

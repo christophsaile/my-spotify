@@ -13,7 +13,7 @@ export default async function RankedList(props: {
 
   return (
     <ol
-      className={`ranked-list grid grid-cols-2 grid-rows-5 grid-flow-col gap-y-6 gap-x-10 ${props.variant} ${props.timeRange}`}
+      className={`ranked-list grid gap-y-6 gap-x-10 md:grid-cols-2 md:grid-rows-5 md:grid-flow-col ${props.variant} ${props.timeRange}`}
     >
       {data.items.map((item: any, index: number) => (
         <li className='flex items-center gap-4 w-full' key={item.id}>

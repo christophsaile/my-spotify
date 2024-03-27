@@ -1,5 +1,5 @@
 import { myPlaylists } from '@/libs/spotify';
-import Card from './card';
+import Image from 'next/image';
 
 export default async function Playlists() {
   const playlists = await (await myPlaylists()).json();
@@ -30,7 +30,7 @@ export default async function Playlists() {
               target='_blank'
               rel='noreferrer'
             >
-              <img className='aspect-square rounded-lg' src={playlist.images[0].url} alt='' />
+              <Image className='aspect-square rounded-lg' src={playlist.images[0].url} alt='' />
               <span>{playlist.name}</span>
             </a>
           </li>
